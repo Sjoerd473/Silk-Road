@@ -1,0 +1,107 @@
+
+
+  .tile {
+    margin:5px;
+    display:flex;
+    align-self:center;
+    width: 5px;
+    height: 5px;
+    background-color: red;
+  }
+
+  .city {
+    margin: 5px;
+    width: 25px;
+    height:25px;
+    background-color: blue;
+    
+  }
+
+  .cityLeft  {
+    width: 25px;
+    height:25px;
+    background-color: blue;
+    display:flex;
+    align-self:center;
+  }
+
+  .cityRight {
+    width: 25px;
+    height:25px;
+    background-color: blue;
+    display:flex;
+    align-self:center;
+  }
+
+  .board {
+    width: 95vw;
+    height: 95vh;
+    background-color: aqua;
+    align-self: center;
+  }
+
+  .board{
+    display:flex;
+    flex-direction: column;
+  }
+
+  .firstRow{
+    display:flex;
+    height: 25px;
+    width:100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .tileRow{
+    display:flex;
+    flex-grow:1;
+    justify-content: space-around;
+  }
+  .secondRow{
+    display:flex;
+    height:400px;
+    flex-grow:1;
+    width:100%;
+    justify-content: space-between;
+    
+    align-items: stretch;
+  }
+  .columnLeft {
+    margin:5px;
+    width:25px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .columnRight {
+    display:flex;
+    flex-direction: column;
+  }
+  .columnRightTop {
+    flex-grow:1;
+    margin:5px;
+    width:25px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .columnRightBottom {
+    margin:5px;
+    flex-grow:1;
+    width:25px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .thirdRow{
+    flex-direction:row-reverse;
+    display:flex;
+    height:25px;
+    width:100%;
+    justify-content: space-between;
+    align-items: center;
+}
+  
