@@ -1,19 +1,28 @@
 let tileNumber = 1
 
 function createCity() {
-    if (tileNumber = 1){
+    
+    if (tileNumber === 1){
         //create first city
+        
         let parent = document.querySelector('.firstRow');
-        console.log(parent)
-        let cityone = document.createElement('div');
-        cityone.classList.add('city', `tile${tileNumber}`)
-        cityone.id = 'test'
-        cityone.textContent = 'CO';
-        parent.appendChild(cityone);
+        let newCity = document.createElement('div');
+        newCity.classList.add('city')
+        newCity.dataset.tile = `${tileNumber}`
+        
+        newCity.textContent = 'CO';
+        parent.appendChild(newCity);
 
         tileNumber++
-    } else if (tileNumber = 10){
+    } else if (tileNumber === 10){
         //create second city
+        let parent = document.querySelector('.firstRow');
+        let newCity = document.createElement('div');
+        newCity.classList.add('city')
+        newCity.dataset.tile = `${tileNumber}`
+        
+        newCity.textContent = 'TR';
+        parent.appendChild(newCity);
         tileNumber++
     }
 
@@ -26,14 +35,14 @@ function rollDice(min, max) {
 }
 
 function createTileRow() {
-    let y = document.querySelector('#test');
-    let x = document.querySelector('#test').parentNode;
+    let tileRow = document.querySelector(`[data-tile='1']`);
+    let tileRowParent = document.querySelector(`[data-tile='1']`).parentNode;
     
     
     let row = document.createElement('div');
     row.classList.add('tileRow');
     
-    x.insertBefore(row,null);
+    tileRowParent.insertBefore(row,null);
 }
 
  function createTiles(finish){   
@@ -42,9 +51,10 @@ function createTileRow() {
 
     for (; tileNumber < finish; tileNumber++){
     let tile = document.createElement('div');
-    tile.classList.add('point',`tile${tileNumber}`);
-    console.log(tile)
-   
+    tile.classList.add('point');
+    tile.dataset.tile = `${tileNumber}`;
+    
+   console.log(tileNumber)
     parent.appendChild(tile);
     }
 }
@@ -54,7 +64,9 @@ function createTileColumn(start, finish) {
 }
 
 function create(){
+    while (tileNumber < 11){
     createCity()
     createTileRow()
     createTiles(10)
+}
 }
