@@ -339,5 +339,112 @@ function create() {
     }
     if (tileNumber === 165){
         createCity();
+        createArrows();
     }
 };
+
+function createArrows(){
+    // CO to GE
+    new LeaderLine(
+        document.querySelector(`[data-tile='1']`),
+        document.querySelector(`[data-tile='153']`),
+        {
+        startPlug: 'arrow1',
+        endPlug: 'arrow1'
+      });
+
+      // CO to TR
+    new LeaderLine(
+        document.querySelector(`[data-tile='1']`),
+        document.querySelector(`[data-tile='10']`),
+        {
+        startPlug: 'arrow1',
+        endPlug: 'arrow1'
+      });
+       
+        // CO to VE
+    new LeaderLine(
+        document.querySelector(`[data-tile='1']`),
+        document.querySelector(`[data-tile='300']`),
+        {
+        startPlug: 'arrow1',
+        endPlug: 'arrow1'
+      });
+
+      // TR to VE
+    new LeaderLine(
+        document.querySelector(`[data-tile='10']`),
+        document.querySelector(`[data-tile='300']`),
+        {
+        startPlug: 'arrow1',
+        endPlug: 'arrow1'
+      });
+       
+   
+
+         // BU to BA
+    new LeaderLine(
+        document.querySelector(`[data-tile='32']`),
+        document.querySelector(`[data-tile='134']`),
+        {
+        
+        endPlug: 'arrow1'
+      });
+      // KA to SA
+ new LeaderLine (
+    document.querySelector(`[data-tile='58']`),
+    document.querySelector(`[data-tile='119']`),
+    {
+        startPlug: 'arrow1',
+        endPlug: 'arrow1'
+    });
+    // CA to IA
+    new LeaderLine (
+        document.querySelector(`[data-tile='73']`),
+        document.querySelector(`[data-tile='200']`),
+        {
+            startPlug: 'arrow1',
+            endPlug: 'arrow1'
+        });
+         // CA to SH
+    new LeaderLine (
+        document.querySelector(`[data-tile='73']`),
+        document.querySelector(`[data-tile='87']`),
+        {
+            startPlug: 'arrow1',
+            endPlug: 'arrow1'
+        });
+         // SH to IA
+    new LeaderLine (
+        document.querySelector(`[data-tile='87']`),
+        document.querySelector(`[data-tile='200']`),
+        {
+            startPlug: 'arrow1',
+            endPlug: 'arrow1'
+        });
+         // BA to TR
+    new LeaderLine (
+        document.querySelector(`[data-tile='134']`),
+        document.querySelector(`[data-tile='10']`),
+        {
+            
+            endPlug: 'arrow1'
+        });
+         // ME to GE
+    new LeaderLine (
+        document.querySelector(`[data-tile='145']`),
+        document.querySelector(`[data-tile='153']`),
+        {
+            startPlug: 'arrow1',
+            endPlug: 'arrow1'
+        });
+         // GE to VE
+    new LeaderLine (
+        document.querySelector(`[data-tile='153']`),
+        document.querySelector(`[data-tile='300']`),
+        {
+            startPlug: 'arrow1',
+            endPlug: 'arrow1'
+        }); 
+}
+
