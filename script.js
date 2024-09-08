@@ -62,9 +62,8 @@ function createCity() {
         parent.appendChild(newCity);
         tileNumber++
 
-    }
-}/* else if (tileNumber === 97) {
-        let parent = document.querySelector('.firstRow');
+     }else if (tileNumber === 97) {
+        let parent = document.querySelector('.thirdRow');
         let newCity = document.createElement('div');
         newCity.classList.add('city')
         newCity.dataset.tile = `${tileNumber}`
@@ -73,7 +72,7 @@ function createCity() {
         parent.appendChild(newCity);
         tileNumber++
     } else if (tileNumber === 119) {
-        let parent = document.querySelector('.firstRow');
+        let parent = document.querySelector('.thirdRow');
         let newCity = document.createElement('div');
         newCity.classList.add('city')
         newCity.dataset.tile = `${tileNumber}`
@@ -83,7 +82,7 @@ function createCity() {
         tileNumber++
 
     } else if (tileNumber === 134) {
-        let parent = document.querySelector('.firstRow');
+        let parent = document.querySelector('.thirdRow');
         let newCity = document.createElement('div');
         newCity.classList.add('city')
         newCity.dataset.tile = `${tileNumber}`
@@ -92,7 +91,7 @@ function createCity() {
         parent.appendChild(newCity);
         tileNumber++
     } else if (tileNumber === 145) {
-        let parent = document.querySelector('.firstRow');
+        let parent = document.querySelector('.thirdRow');
         let newCity = document.createElement('div');
         newCity.classList.add('city')
         newCity.dataset.tile = `${tileNumber}`
@@ -102,7 +101,7 @@ function createCity() {
         tileNumber++
 
     } else if (tileNumber === 153) {
-        let parent = document.querySelector('.firstRow');
+        let parent = document.querySelector('.thirdRow');
         let newCity = document.createElement('div');
         newCity.classList.add('city')
         newCity.dataset.tile = `${tileNumber}`
@@ -110,27 +109,29 @@ function createCity() {
         newCity.textContent = 'GE';
         parent.appendChild(newCity);
         tileNumber++
-    } else if (tileNumber === ) {
-        let parent = document.querySelector('.firstRow');
-        let newCity = document.createElement('div');
-        newCity.classList.add('city')
-        newCity.dataset.tile = `${tileNumber}` // give this a very high number?
+    }  else if (tileNumber === 165 ) {
+        let parent = document.querySelector('.secondRow');
+        let sibling = document.querySelector('.rightColumn')
+        let newCityOne = document.createElement('div');
+        newCityOne.classList.add('rightCity')
+        newCityOne.dataset.tile = `300` // give this a very high number?
 
-        newCity.textContent = 'VE'
-        parent.appendChild(newCity);
-        tileNumber++
+        newCityOne.textContent = 'VE'
+        parent.insertBefore(newCityOne,parent.lastElementChild);
+        
 
-    } else if (tileNumber === ) {
-        let parent = document.querySelector('.firstRow');
-        let newCity = document.createElement('div');
-        newCity.classList.add('city')
-        newCity.dataset.tile = `${tileNumber}` //give this a very high number?
+    
+        
+        let newCityTwo = document.createElement('div');
+        newCityTwo.classList.add('leftCity')
+        newCityTwo.dataset.tile = `200` //give this a very high number?
 
-        newCity.textContent = 'IA';
-        parent.appendChild(newCity);
-        tileNumber++
-    }
-} */
+        newCityTwo.textContent = 'IA';
+        parent.insertBefore(newCityTwo,newCityOne);;
+        
+    
+} 
+}
 // For rolling any amount of dice
 
 function rollDice(min, max) {
@@ -140,6 +141,14 @@ function rollDice(min, max) {
 function createTileRow() {
 
     let tileRowParent = document.querySelector('.firstRow');
+    let row = document.createElement('div');
+    row.classList.add('tileRow');
+
+    tileRowParent.appendChild(row);
+} 
+function createTileRowBottom() {
+
+    let tileRowParent = document.querySelector('.thirdRow');
     let row = document.createElement('div');
     row.classList.add('tileRow');
 
@@ -197,7 +206,7 @@ function createTiles() {
             container.appendChild(tile);
         }
     } else if (tileNumber === 74) {
-        createTileColumn()
+        createTileColumnRight()
 
         for (; tileNumber < 87; tileNumber++) {
             const parent = document.querySelector('.rightColumnPart')
@@ -209,7 +218,7 @@ function createTiles() {
             parent.appendChild(tile);
         }
     } else if (tileNumber === 88) {
-        createTileColumn()
+        createTileColumnRight()
 
         for (; tileNumber < 97; tileNumber++) {
             const parent = document.querySelector('.rightColumn')
@@ -220,19 +229,86 @@ function createTiles() {
 
             container.appendChild(tile);
         }
+    } else if (tileNumber === 98) {
+        createTileRowBottom()
+
+        for (; tileNumber < 119; tileNumber++) {
+            const parent = document.querySelector('.thirdRow')
+            const container = parent.lastElementChild
+            let tile = document.createElement('div');
+            tile.classList.add('point');
+            tile.dataset.tile = `${tileNumber}`;
+
+            container.appendChild(tile);
+        }
+    } else if (tileNumber === 120) {
+        createTileRowBottom()
+
+        for (; tileNumber < 134; tileNumber++) {
+            const parent = document.querySelector('.thirdRow')
+            const container = parent.lastElementChild
+            let tile = document.createElement('div');
+            tile.classList.add('point');
+            tile.dataset.tile = `${tileNumber}`;
+
+            container.appendChild(tile);
+        }
+    } else if (tileNumber === 135) {
+        createTileRowBottom()
+
+        for (; tileNumber < 145; tileNumber++) {
+            const parent = document.querySelector('.thirdRow')
+            const container = parent.lastElementChild
+            let tile = document.createElement('div');
+            tile.classList.add('point');
+            tile.dataset.tile = `${tileNumber}`;
+
+            container.appendChild(tile);
+        }
+    } else if (tileNumber === 146) {
+        createTileRowBottom()
+
+        for (; tileNumber < 153; tileNumber++) {
+            const parent = document.querySelector('.thirdRow')
+            const container = parent.lastElementChild
+            let tile = document.createElement('div');
+            tile.classList.add('point');
+            tile.dataset.tile = `${tileNumber}`;
+
+            container.appendChild(tile);
+        }
+    } else if (tileNumber === 154) {
+        createTileColumnLeft()
+
+        for (; tileNumber < 165 ; tileNumber++) {
+            const parent = document.querySelector('.leftColumn')
+             
+            let tile = document.createElement('div');
+            tile.classList.add('point');
+            tile.dataset.tile = `${tileNumber}`;
+
+            parent.appendChild(tile);
+        }
     }
 }
 
-
-function createTileColumn() {
+//combine these into a single function that takes a parameter to decide what column to make
+function createTileColumnRight() {
     let tileColumnParent = document.querySelector('.rightColumn');
     let column = document.createElement('div');
     column.classList.add('rightColumnPart');
 
     tileColumnParent.appendChild(column);
 }
+function createTileColumnLeft(){
+    let tileColumnParent = document.querySelector('.secondRow');
+    let column = document.createElement('div');
+    column.classList.add('leftColumn');
+
+    tileColumnParent.appendChild(column);
+}
 function createOutline() {
-    // this will create various empty div containers to shape the board
+    
     let board = document.createElement('div');
     board.classList.add('board');
     let boardParent = document.querySelector('body');
@@ -256,9 +332,12 @@ function createOutline() {
 }
 function create() {
     createOutline()
-    while (tileNumber < 97) {
-        createCity()
+    while (tileNumber < 165) {
+        createCity();
 
-        createTiles()
+        createTiles();
+    }
+    if (tileNumber === 165){
+        createCity();
     }
 };
