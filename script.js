@@ -450,9 +450,21 @@ function create() {
     }
 };
 
-function rollDice(min, max) {
-    return Math.ceil(Math.random() * (max - min) + min);
+
+
+function rollDice(number) {
+    let total = [];
+    for (let i = 0; i < number; i++) {
+        total.push(Math.ceil(Math.random() * 6));
+
+
+    }
+    return total.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+
+    );
 }
+
 
 function removeItemOnce(arr, value) {
     var index = arr.indexOf(value);
@@ -506,7 +518,7 @@ function movePlayer() {
         })
 
     }
-     //for when the position is too close to the start or end of the board
+    //for when the position is too close to the start or end of the board, turn the stuff below the if statement into its own function?
     /*if (activePlayer.position <= 5 || activePlayer.position >= 158) {
         allTiles.unshift(allTiles.slice(157));
         allTiles.push(allTiles.slice(0,6))
