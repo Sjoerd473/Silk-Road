@@ -467,7 +467,7 @@ function rollDice(number) {
 
 
 function removeItemOnce(arr, value) {
-    var index = arr.indexOf(value);
+    let index = arr.indexOf(value);
     if (index > -1) {
         arr.splice(index, 1);
     }
@@ -487,13 +487,41 @@ function movePlayer() {
 
 
 
-    const moves = rollDice(1, 6);
+    const moves = rollDice(1);
     const position = allTiles[activePlayer.position];
     position.classList.add('activePlayer')
 
-    if (activePlayer.position <= 5 || activePlayer.position >= 158) {
-        console.log('boop')
-        const movement = allTiles.slice(activePlayer.position - moves, activePlayer.position + moves + 1);
+    if (activePlayer.position <= 5) {
+        const extraTiles = allTiles.slice(allTiles.length - 6).reverse();
+        console.log(extraTiles.length)
+
+
+        const modifiedTiles = allTiles
+            .reverse()
+            .concat(extraTiles)
+            .reverse();
+        console.log(modifiedTiles);
+
+
+
+        const movement = modifiedTiles.slice((activePlayer.position + 6) - moves, (activePlayer.position + 6) + moves + 1);
+        console.log(movement);
+        removeItemOnce(movement, position);
+        movement.forEach((tile) => {
+            tile.classList.add('movement')
+            tile.addEventListener('click', (e) => {
+                activePlayer.position = allTiles.indexOf(e.target);
+                e.target.classList.add('activePlayer');
+                position.classList.remove('activePlayer');
+                movement.forEach((tile) => { tile.classList.remove('movement') })
+            });
+        })
+    } else if (activePlayer.position >= 158) {
+        console.log('boophigh')
+        const modifiedTiles = allTiles.concat(allTiles.slice(0,6)) 
+        console.log(modifiedTiles);
+        const movement = modifiedTiles.slice(activePlayer.position - moves, activePlayer.position + moves + 1);
+        console.log(movement)
         removeItemOnce(movement, position);
         movement.forEach((tile) => {
             tile.classList.add('movement')
@@ -539,7 +567,7 @@ function movePlayer() {
 }
 //A player object for testing.
 
-const activePlayer = { name: 'Dave', moves: 0, position: 9 };
+const activePlayer = { name: 'Dave', moves: 0, position: 161 };
 
 
 // allTiles[`${playerOne.position}`- 1] // gets the position of the player on the board
