@@ -6,50 +6,50 @@
     align-self:center;
     width: 5px;
     height: 5px;
-    background-color: red;
+    
+    
+    
+    border-radius: 50%;
+    border: 1px solid black;
   }
 
   .city {
     margin: 5px;
     width: 25px;
     height:25px;
-    background-color: blue;
+    border: 1px solid black;
+    
     text-align: center;
     
    
     
   }
 
-  .leftCity  {
+  .leftCity, .rightCity  {
     width: 25px;
-    height:25px;
-    background-color: blue;
+    height: 25px;
+    border: 1px solid black;
     display:flex;
     align-self:center;
     text-align: center;
   }
 
-  .rightCity {
-    width: 25px;
-    height:25px;
-    background-color: blue;
-    display:flex;
-    align-self:center;
-    text-align: center;
+  .point, .city, .leftCity, .rightCity{
+    transition: box-shadow 2s;
   }
+
+  
 
   .board {
+    display:flex;
+    flex-direction: column;
     width: 95vw;
     height: 95vh;
-    background-color: aqua;
+    
     align-self: center;
   }
 
-  .board{
-    display:flex;
-    flex-direction: column;
-  }
-
+ 
   .firstRow{
     display:flex;
     height: 25px;
@@ -78,7 +78,7 @@
     margin:5px;
     width:25px;
     display:flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: space-between;
   }
 
@@ -107,3 +107,25 @@
   .thirdRow .tileRow {
     flex-direction: row-reverse;
   }
+
+  .movement{
+    cursor: pointer;
+    
+    box-shadow: 0 0 6px 4px orange;
+  }
+
+  .movement::after {
+    content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  transform: scale(2);
+}
+  
+
+  .activePlayer {
+    box-shadow: 0 0 3px 5px red;
+  }
+.rollDie{
+  color:red;
+}

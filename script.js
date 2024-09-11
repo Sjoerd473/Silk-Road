@@ -26,6 +26,13 @@ function createOutline() {
     let rightColumn = document.createElement('div');
     rightColumn.classList.add('rightColumn');
     secondRow.appendChild(rightColumn);
+
+    let rollDie = document.createElement('button');
+    rollDie.classList.add('rollDie');
+    rollDie.textContent = 'Roll the dice!'
+    rollDie.addEventListener('click',movePlayer);
+    
+    board.appendChild(rollDie);
 };
 
 function createCity() {
@@ -331,15 +338,22 @@ function createTiles() {
         }
     }
 };
-
+//lifeOffset can be used to offset the middle label text
+//pathLabel to show a label along the path
+//make the arrows show up when hovering over a city
 function createArrows() {
     // CO to GE
     new LeaderLine(
         document.querySelector(`[data-tile='1']`),
         document.querySelector(`[data-tile='153']`),
         {
-            startPlug: 'arrow1',
-            endPlug: 'arrow1'
+            startPlug: 'arrow3',
+            endPlug: 'arrow3',
+            
+            size:3,
+            dash:true,
+            path: 'arc',
+            color: 'blue'
         });
 
     // CO to TR
@@ -347,8 +361,14 @@ function createArrows() {
         document.querySelector(`[data-tile='1']`),
         document.querySelector(`[data-tile='10']`),
         {
-            startPlug: 'arrow1',
-            endPlug: 'arrow1'
+            startPlug: 'arrow3',
+            endPlug: 'arrow3',
+            startSocket:'bottom',
+            endSocket:'bottom',
+            size:3,
+            dash:true,
+            
+            color: 'blue'
         });
 
     // CO to VE
@@ -356,8 +376,13 @@ function createArrows() {
         document.querySelector(`[data-tile='1']`),
         document.querySelector(`[data-tile='300']`),
         {
-            startPlug: 'arrow1',
-            endPlug: 'arrow1'
+            startPlug: 'arrow3',
+            endPlug: 'arrow3',
+            
+            size:3,
+            dash:true,
+            
+            color: 'blue'
         });
 
     // TR to VE
@@ -365,8 +390,13 @@ function createArrows() {
         document.querySelector(`[data-tile='10']`),
         document.querySelector(`[data-tile='300']`),
         {
-            startPlug: 'arrow1',
-            endPlug: 'arrow1'
+            startPlug: 'arrow3',
+            endPlug: 'arrow3',
+            
+            size:3,
+            dash:true,
+            path: 'arc',
+            color: 'blue'
         });
 
 
@@ -377,39 +407,60 @@ function createArrows() {
         document.querySelector(`[data-tile='134']`),
         {
 
-            endPlug: 'arrow1'
+            endPlug: 'arrow3',
+            size:3,
+            dash:true,
+            color:'green',
         });
     // KA to SA
     new LeaderLine(
         document.querySelector(`[data-tile='58']`),
         document.querySelector(`[data-tile='119']`),
         {
-            startPlug: 'arrow1',
-            endPlug: 'arrow1'
+            endPlug: 'arrow3',
+            size:3,
+            dash:true,
+            color:'green',
         });
     // CA to IA
     new LeaderLine(
         document.querySelector(`[data-tile='73']`),
         document.querySelector(`[data-tile='200']`),
         {
-            startPlug: 'arrow1',
-            endPlug: 'arrow1'
+            startPlug: 'arrow3',
+            endPlug: 'arrow3',
+            
+            size:3,
+            dash:true,
+            
+            color: 'blue'
         });
     // CA to SH
     new LeaderLine(
         document.querySelector(`[data-tile='73']`),
         document.querySelector(`[data-tile='87']`),
         {
-            startPlug: 'arrow1',
-            endPlug: 'arrow1'
+            startPlug: 'arrow3',
+            endPlug: 'arrow3',
+            startSocket:'left',
+            endSocket:'left',
+            size:3,
+            dash:true,
+            
+            color: 'blue'
         });
     // SH to IA
     new LeaderLine(
         document.querySelector(`[data-tile='87']`),
         document.querySelector(`[data-tile='200']`),
         {
-            startPlug: 'arrow1',
-            endPlug: 'arrow1'
+            startPlug: 'arrow3',
+            endPlug: 'arrow3',
+            
+            size:3,
+            dash:true,
+            
+            color: 'blue'
         });
     // BA to TR
     new LeaderLine(
@@ -417,23 +468,54 @@ function createArrows() {
         document.querySelector(`[data-tile='10']`),
         {
 
-            endPlug: 'arrow1'
+            startPlug: 'arrow3',
+            endPlug: 'arrow3',
+            
+            size:3,
+            dash:true,
+            
+            color: 'blue'
         });
     // ME to GE
     new LeaderLine(
         document.querySelector(`[data-tile='145']`),
         document.querySelector(`[data-tile='153']`),
         {
-            startPlug: 'arrow1',
-            endPlug: 'arrow1'
+            startPlug: 'arrow3',
+            endPlug: 'arrow3',
+            startSocket:'top',
+            endSocket:'top',
+            size:3,
+            dash:true,
+            
+            color: 'blue'
+        });
+    //ME to SH
+    new LeaderLine(
+        document.querySelector(`[data-tile='145']`),
+        document.querySelector(`[data-tile='87']`),
+        {
+            startPlug: 'arrow3',
+            endPlug: 'arrow3',
+            startSocket:'top',
+            endSocket:'left',
+            size:3,
+            dash:true,
+            
+            color: 'blue'
         });
     // GE to VE
     new LeaderLine(
         document.querySelector(`[data-tile='153']`),
         document.querySelector(`[data-tile='300']`),
         {
-            startPlug: 'arrow1',
-            endPlug: 'arrow1'
+            startPlug: 'arrow3',
+            endPlug: 'arrow3',
+            
+            size:3,
+            dash:true,
+            
+            color: 'blue'
         });
 };
 
@@ -492,20 +574,15 @@ function movePlayer() {
     position.classList.add('activePlayer')
 
     if (activePlayer.position <= 5) {
-        const extraTiles = allTiles.slice(allTiles.length - 6).reverse();
-        console.log(extraTiles.length)
-
-
-        const modifiedTiles = allTiles
-            .reverse()
-            .concat(extraTiles)
-            .reverse();
-        console.log(modifiedTiles);
-
-
-
-        const movement = modifiedTiles.slice((activePlayer.position + 6) - moves, (activePlayer.position + 6) + moves + 1);
-        console.log(movement);
+        
+         const extraTiles = allTiles.slice(allTiles.length - 6).reverse();
+        
+         let modifiedTiles = allTiles.toReversed();
+         modifiedTiles = modifiedTiles.concat(extraTiles).reverse();
+       
+        const movement = modifiedTiles.slice((activePlayer.position + 6) - moves, (activePlayer.position + 6) + moves + 1); 
+        
+        
         removeItemOnce(movement, position);
         movement.forEach((tile) => {
             tile.classList.add('movement')
@@ -517,16 +594,17 @@ function movePlayer() {
             });
         })
     } else if (activePlayer.position >= 158) {
-        console.log('boophigh')
+        
         const modifiedTiles = allTiles.concat(allTiles.slice(0,6)) 
-        console.log(modifiedTiles);
+        
         const movement = modifiedTiles.slice(activePlayer.position - moves, activePlayer.position + moves + 1);
-        console.log(movement)
+        
         removeItemOnce(movement, position);
         movement.forEach((tile) => {
             tile.classList.add('movement')
             tile.addEventListener('click', (e) => {
                 activePlayer.position = allTiles.indexOf(e.target);
+                
                 e.target.classList.add('activePlayer');
                 position.classList.remove('activePlayer');
                 movement.forEach((tile) => { tile.classList.remove('movement') })
@@ -546,28 +624,12 @@ function movePlayer() {
         })
 
     }
-    //for when the position is too close to the start or end of the board, turn the stuff below the if statement into its own function?
-    /*if (activePlayer.position <= 5 || activePlayer.position >= 158) {
-        allTiles.unshift(allTiles.slice(157));
-        allTiles.push(allTiles.slice(0,6))
-        console.log('boop')
-*/
-
-
-    /*  one = allTiles.indexOf(position);
-        slice rollDice above and below one
-        highlight these by adding a css class
-        add an eventlistner for clicks that moves the player ie updates their position.
-    */
-
-
-
-    //const position = allTiles[`${playerOne.position}`- 1]
+   
 
 }
 //A player object for testing.
 
-const activePlayer = { name: 'Dave', moves: 0, position: 161 };
+const activePlayer = { name: 'Dave', moves: 0, position: 1 };
 
 
 // allTiles[`${playerOne.position}`- 1] // gets the position of the player on the board
