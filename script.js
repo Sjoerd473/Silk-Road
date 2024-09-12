@@ -8,12 +8,15 @@ document.querySelectorAll('.playerButtons').forEach((button) => {
         let value = Number(document.querySelector('input[name="players"]:checked').value)
         let parent = document.querySelector('.fieldBox');
         parent.replaceChildren()
+        let j = 1
         for (i = 0; i < value; i++) {
             let field = document.createElement('input');
             field.classList.add('nameInput');
-            field.setAttribute('type', 'text');
+            field.setAttribute('type', 'text',);
+            field.id = ('player' + j);
+            j++
             parent.appendChild(field);
-        } 
+        }
     })
 
 })
@@ -50,8 +53,8 @@ function createOutline() {
     let rollDie = document.createElement('button');
     rollDie.classList.add('rollDie');
     rollDie.textContent = 'Roll the dice!'
-    rollDie.addEventListener('click',movePlayer);
-    
+    rollDie.addEventListener('click', movePlayer);
+
     board.appendChild(rollDie);
 
     let endButton = document.createElement('button');
@@ -62,7 +65,7 @@ function createOutline() {
     board.appendChild(endButton);
 };
 
-function createInputFields(){
+function createInputFields() {
 
 }
 
@@ -180,7 +183,7 @@ function createCity() {
         let sibling = document.querySelector('.rightColumn')
         let newCityOne = document.createElement('div');
         newCityOne.classList.add('rightCity')
-        newCityOne.dataset.tile = `300` 
+        newCityOne.dataset.tile = `300`
 
         newCityOne.textContent = 'VE'
         parent.insertBefore(newCityOne, parent.lastElementChild);
@@ -190,7 +193,7 @@ function createCity() {
 
         let newCityTwo = document.createElement('div');
         newCityTwo.classList.add('leftCity')
-        newCityTwo.dataset.tile = `200` 
+        newCityTwo.dataset.tile = `200`
 
         newCityTwo.textContent = 'IA';
         parent.insertBefore(newCityTwo, newCityOne);;
@@ -380,9 +383,9 @@ function createArrows() {
         {
             startPlug: 'arrow3',
             endPlug: 'arrow3',
-            
-            size:3,
-            dash:true,
+
+            size: 3,
+            dash: true,
             path: 'arc',
             color: 'blue'
         });
@@ -394,11 +397,11 @@ function createArrows() {
         {
             startPlug: 'arrow3',
             endPlug: 'arrow3',
-            startSocket:'bottom',
-            endSocket:'bottom',
-            size:3,
-            dash:true,
-            
+            startSocket: 'bottom',
+            endSocket: 'bottom',
+            size: 3,
+            dash: true,
+
             color: 'blue'
         });
 
@@ -409,10 +412,10 @@ function createArrows() {
         {
             startPlug: 'arrow3',
             endPlug: 'arrow3',
-            
-            size:3,
-            dash:true,
-            
+
+            size: 3,
+            dash: true,
+
             color: 'blue'
         });
 
@@ -423,9 +426,9 @@ function createArrows() {
         {
             startPlug: 'arrow3',
             endPlug: 'arrow3',
-            
-            size:3,
-            dash:true,
+
+            size: 3,
+            dash: true,
             path: 'arc',
             color: 'blue'
         });
@@ -439,9 +442,9 @@ function createArrows() {
         {
 
             endPlug: 'arrow3',
-            size:3,
-            dash:true,
-            color:'green',
+            size: 3,
+            dash: true,
+            color: 'green',
         });
     // KA to SA
     new LeaderLine(
@@ -449,9 +452,9 @@ function createArrows() {
         document.querySelector(`[data-tile='119']`),
         {
             endPlug: 'arrow3',
-            size:3,
-            dash:true,
-            color:'green',
+            size: 3,
+            dash: true,
+            color: 'green',
         });
     // CA to IA
     new LeaderLine(
@@ -460,10 +463,10 @@ function createArrows() {
         {
             startPlug: 'arrow3',
             endPlug: 'arrow3',
-            
-            size:3,
-            dash:true,
-            
+
+            size: 3,
+            dash: true,
+
             color: 'blue'
         });
     // CA to SH
@@ -473,11 +476,11 @@ function createArrows() {
         {
             startPlug: 'arrow3',
             endPlug: 'arrow3',
-            startSocket:'left',
-            endSocket:'left',
-            size:3,
-            dash:true,
-            
+            startSocket: 'left',
+            endSocket: 'left',
+            size: 3,
+            dash: true,
+
             color: 'blue'
         });
     // SH to IA
@@ -487,10 +490,10 @@ function createArrows() {
         {
             startPlug: 'arrow3',
             endPlug: 'arrow3',
-            
-            size:3,
-            dash:true,
-            
+
+            size: 3,
+            dash: true,
+
             color: 'blue'
         });
     // BA to TR
@@ -501,10 +504,10 @@ function createArrows() {
 
             startPlug: 'arrow3',
             endPlug: 'arrow3',
-            
-            size:3,
-            dash:true,
-            
+
+            size: 3,
+            dash: true,
+
             color: 'blue'
         });
     // ME to GE
@@ -514,11 +517,11 @@ function createArrows() {
         {
             startPlug: 'arrow3',
             endPlug: 'arrow3',
-            startSocket:'top',
-            endSocket:'top',
-            size:3,
-            dash:true,
-            
+            startSocket: 'top',
+            endSocket: 'top',
+            size: 3,
+            dash: true,
+
             color: 'blue'
         });
     //ME to SH
@@ -528,11 +531,11 @@ function createArrows() {
         {
             startPlug: 'arrow3',
             endPlug: 'arrow3',
-            startSocket:'top',
-            endSocket:'left',
-            size:3,
-            dash:true,
-            
+            startSocket: 'top',
+            endSocket: 'left',
+            size: 3,
+            dash: true,
+
             color: 'blue'
         });
     // GE to VE
@@ -542,38 +545,89 @@ function createArrows() {
         {
             startPlug: 'arrow3',
             endPlug: 'arrow3',
-            
-            size:3,
-            dash:true,
-            
+
+            size: 3,
+            dash: true,
+
             color: 'blue'
         });
 };
 //the name needs to be an input from a field, not hardcoded
-function createPlayers(){
+function createPlayers() {
     let count = Number(document.querySelector('input[name="players"]:checked').value)
-        switch(count){
+    if (count === 2) {
+        let name1 = document.getElementById('player1').value
+        let name2 = document.getElementById('player2').value
+        switch (count) {
             case 2:
-                new Player('Harry', 'playerOne');
-                new Player('Dave');
-            break;
+                new Player(name1, 'playerOne');
+                new Player(name2);
+                break;
             case 3:
-                new Player('Harry', 'playerOne');
-                new Player('Dave');
-                new Player('Will');
-            break;
+                new Player(name1, 'playerOne');
+                new Player(name2);
+                new Player(name3);
+                break;
             case 4:
-                new Player('Harry', 'playerOne');
-                new Player('Dave');
-                new Player('Will');
-                new Player('Geoff');
-            break;
+                new Player(name1, 'playerOne');
+                new Player(name2);
+                new Player(name3);
+                new Player(name4);
+                break;
         }
+    } else if (count === 3) {
+        let name1 = document.getElementById('player1').value
+        let name2 = document.getElementById('player2').value
+        let name3 = document.getElementById('player3').value
+        switch (count) {
+            case 2:
+                new Player(name1, 'playerOne');
+                new Player(name2);
+                break;
+            case 3:
+                new Player(name1, 'playerOne');
+                new Player(name2);
+                new Player(name3);
+                break;
+            case 4:
+                new Player(name1, 'playerOne');
+                new Player(name2);
+                new Player(name3);
+                new Player(name4);
+                break;
+        }
+
+    } else if (count === 4) {
+        let name1 = document.getElementById('player1').value
+        let name2 = document.getElementById('player2').value
+        let name3 = document.getElementById('player3').value
+        let name4 = document.getElementById('player4').value
+
+        switch (count) {
+            case 2:
+                new Player(name1, 'playerOne');
+                new Player(name2);
+                break;
+            case 3:
+                new Player(name1, 'playerOne');
+                new Player(name2);
+                new Player(name3);
+                break;
+            case 4:
+                new Player(name1, 'playerOne');
+                new Player(name2);
+                new Player(name3);
+                new Player(name4);
+                break;
+        }
+    }
+
+
 }
 
 function create() {
     createPlayers()
-    activePlayer = playerArray [0]
+    activePlayer = playerArray[0]
     createOutline()
     while (tileNumber < 165) {
         createCity();
@@ -584,7 +638,7 @@ function create() {
         createCity();
         createArrows();
     }
-} ;
+};
 
 
 
@@ -614,15 +668,15 @@ function removeItemOnce(arr, value) {
 
 
 function movePlayer() {
-    document.querySelector('.rollDie').removeEventListener('click',movePlayer);
-    
+    document.querySelector('.rollDie').removeEventListener('click', movePlayer);
+
     const boardTop = Array.from(document.querySelectorAll('.firstRow > [data-tile], .firstRow > .tileRow > [data-tile]'))
     const boardSideRight = Array.from(document.querySelectorAll('.rightColumnPartTop > [data-tile], [data-tile ="87"], .rightColumnPartBottom > [data-tile]'));
     const boardBottom = Array.from(document.querySelectorAll('.thirdRow > [data-tile], .thirdRow > .tileRow > [data-tile]'));
     const boardSideLeft = Array.from(document.querySelectorAll('.leftColumn > [data-tile]'));
 
-     allTiles = boardTop.concat(boardSideRight, boardBottom, boardSideLeft);
-    
+    allTiles = boardTop.concat(boardSideRight, boardBottom, boardSideLeft);
+
 
 
 
@@ -631,15 +685,15 @@ function movePlayer() {
     position.classList.add('activePlayer')
 
     if (activePlayer.position <= 5) {
-        
-         const extraTiles = allTiles.slice(allTiles.length - 6).reverse();
-        
-         let modifiedTiles = allTiles.toReversed();
-         modifiedTiles = modifiedTiles.concat(extraTiles).reverse();
-       
-        const movement = modifiedTiles.slice((activePlayer.position + 6) - moves, (activePlayer.position + 6) + moves + 1); 
-        
-        
+
+        const extraTiles = allTiles.slice(allTiles.length - 6).reverse();
+
+        let modifiedTiles = allTiles.toReversed();
+        modifiedTiles = modifiedTiles.concat(extraTiles).reverse();
+
+        const movement = modifiedTiles.slice((activePlayer.position + 6) - moves, (activePlayer.position + 6) + moves + 1);
+
+
         removeItemOnce(movement, position);
         movement.forEach((tile) => {
             tile.classList.add('movement')
@@ -651,17 +705,17 @@ function movePlayer() {
             });
         })
     } else if (activePlayer.position >= 158) {
-        
-        const modifiedTiles = allTiles.concat(allTiles.slice(0,6)) 
-        
+
+        const modifiedTiles = allTiles.concat(allTiles.slice(0, 6))
+
         const movement = modifiedTiles.slice(activePlayer.position - moves, activePlayer.position + moves + 1);
-        
+
         removeItemOnce(movement, position);
         movement.forEach((tile) => {
             tile.classList.add('movement')
             tile.addEventListener('click', (e) => {
                 activePlayer.position = allTiles.indexOf(e.target);
-                
+
                 e.target.classList.add('activePlayer');
                 position.classList.remove('activePlayer');
                 movement.forEach((tile) => { tile.classList.remove('movement') })
@@ -681,20 +735,20 @@ function movePlayer() {
         })
 
     }
-   
+
 
 }
 
-function endTurn(){
-    if(playerArray[playerArray.indexOf(activePlayer) +1] === undefined){
+function endTurn() {
+    if (playerArray[playerArray.indexOf(activePlayer) + 1] === undefined) {
         activePlayer = playerArray[0];
     } else {
-    activePlayer = playerArray[playerArray.indexOf(activePlayer) +1];
-    ;
-} document.querySelector('.rollDie').addEventListener('click',movePlayer);  
+        activePlayer = playerArray[playerArray.indexOf(activePlayer) + 1];
+        ;
+    } document.querySelector('.rollDie').addEventListener('click', movePlayer);
 }
 
-function chooseStart(){
+function chooseStart() {
     let cities = Array.from(document.querySelectorAll('.city'))
 }
 //A player object for testing.
