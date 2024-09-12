@@ -23,9 +23,7 @@ document.querySelectorAll('.playerButtons').forEach((button) => {
     })
 
 })
-// window.addEventListener('DOMContentLoaded', create);
 
-//remove all the existing html elements when loading the board
 
 
 function createOutline() {
@@ -54,9 +52,19 @@ function createOutline() {
     secondRow.appendChild(rightColumn);
 
     let rollDie = document.createElement('button');
+    let i = 0
     rollDie.classList.add('rollDie');
-    rollDie.textContent = 'Roll the dice!'
-    rollDie.addEventListener('click', movePlayer);
+    rollDie.textContent = `Roll the dice to select your starting position` 
+    rollDie.addEventListener('click', chooseStart);
+
+    rollDie.addEventListener('click', (e) =>{
+        i++
+        if(i === 4){
+            rollDie.removeEventListener('click', chooseStart);
+            rollDie.addEventListener('click', movePlayer);
+            rollDie.textContent= 'Roll the dice to move around the board';
+        }
+    })
 
     board.appendChild(rollDie);
 
@@ -553,7 +561,7 @@ function createArrows() {
             color: 'blue'
         });
 };
-//the name needs to be an input from a field, not hardcoded
+
 function createPlayers() {
     let count = Number(document.querySelector('input[name="players"]:checked').value)
     if (count === 2) {
@@ -809,27 +817,10 @@ function chooseStart() {
     
 }
 
-/*function something() {
-    let optionOne = clockwise[movement - 1];
-    optionOne.classList.add('movement');
-    optionOne.addEventListener('click', function (e) {
-        optionOne.removeEventListener('click', (e))
-        optionTwo.removeEventListener('click', (e));
-        activePlayer.position = allTiles.indexOf(e.target);
-        e.target.classList.add(activePlayer.class);
-        optionOne.classList.remove('movement');
-        optionTwo.classList.remove('movement');
-        if (playerArray[playerArray.indexOf(activePlayer) + 1] === undefined) {
-            activePlayer = playerArray[0];
-        } else {
-            activePlayer = playerArray[playerArray.indexOf(activePlayer) + 1];
-            ;
-        }})
-} */
 
 
-// allTiles[`${playerOne.position}`- 1] // gets the position of the player on the board
-//include more parameters in the function declaration when needed, name to equal some input value
+
+
 function Player(name, identifier) {
     this.name = name;
     this.number = playerArray.length + 1
@@ -841,4 +832,3 @@ function Player(name, identifier) {
 
 // position in index of the array, not on the board
 
-// end turn button: activePlayer = playerArray.indexOf(activePlayer + 1)
