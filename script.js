@@ -670,12 +670,7 @@ function removeItemOnce(arr, value) {
 function movePlayer() {
     document.querySelector('.rollDie').removeEventListener('click', movePlayer);
 
-    const boardTop = Array.from(document.querySelectorAll('.firstRow > [data-tile], .firstRow > .tileRow > [data-tile]'))
-    const boardSideRight = Array.from(document.querySelectorAll('.rightColumnPartTop > [data-tile], [data-tile ="87"], .rightColumnPartBottom > [data-tile]'));
-    const boardBottom = Array.from(document.querySelectorAll('.thirdRow > [data-tile], .thirdRow > .tileRow > [data-tile]'));
-    const boardSideLeft = Array.from(document.querySelectorAll('.leftColumn > [data-tile]'));
-
-    allTiles = boardTop.concat(boardSideRight, boardBottom, boardSideLeft);
+    
 
 
 
@@ -749,7 +744,38 @@ function endTurn() {
 }
 
 function chooseStart() {
-    let cities = Array.from(document.querySelectorAll('.city'))
+
+    const boardTop = Array.from(document.querySelectorAll('.firstRow > [data-tile], .firstRow > .tileRow > [data-tile]'))
+    const boardSideRight = Array.from(document.querySelectorAll('.rightColumnPartTop > [data-tile], [data-tile ="87"], .rightColumnPartBottom > [data-tile]'));
+    const boardBottom = Array.from(document.querySelectorAll('.thirdRow > [data-tile], .thirdRow > .tileRow > [data-tile]'));
+    const boardSideLeft = Array.from(document.querySelectorAll('.leftColumn > [data-tile]'));
+
+    allTiles = boardTop.concat(boardSideRight, boardBottom, boardSideLeft);
+    
+    let clockwise = Array.from(document.querySelectorAll('.city'));
+    let counterClockwise = Array.from(document.querySelectorAll('.city')).reverse();
+    let movement = rollDice(1);
+    
+    let optionOne = clockwise[movement - 1];
+    optionOne.classList.add('movement');
+    optionOne.addEventListener('click', function (e) {
+        optionOne.removeEventListener('click', (e))
+        optionTwo.removeEventListener('click', (e));
+        activePlayer.position = allTiles.indexOf(e.target);
+        optionOne.classList.remove('movement');
+        optionTwo.classList.remove('movement');
+    })
+    
+    let optionTwo = counterClockwise[movement - 1];
+    optionTwo.classList.add('movement');
+    optionTwo.addEventListener('click', function (e) {
+        optionOne.removeEventListener('click', (e))
+        optionTwo.removeEventListener('click', (e));
+        activePlayer.position = allTiles.indexOf(e.target);
+        optionOne.classList.remove('movement');
+        optionTwo.classList.remove('movement');
+    })
+    
 }
 //A player object for testing.
 
