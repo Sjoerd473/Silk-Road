@@ -1,10 +1,30 @@
 let tileNumber = 1
+let allTiles = [];
+let playerArray = [];
+let activePlayer
 
-window.addEventListener('DOMContentLoaded', create);
+document.querySelectorAll('.playerButtons').forEach((button) => {
+    button.addEventListener('click', () => {
+        let value = Number(document.querySelector('input[name="players"]:checked').value)
+        let parent = document.querySelector('.fieldBox');
+        parent.replaceChildren()
+        for (i = 0; i < value; i++) {
+            let field = document.createElement('input');
+            field.classList.add('nameInput');
+            field.setAttribute('type', 'text');
+            parent.appendChild(field);
+        } 
+    })
 
+})
+// window.addEventListener('DOMContentLoaded', create);
+
+//remove all the existing html elements when loading the board
 
 
 function createOutline() {
+
+    document.querySelector('body').replaceChildren()
 
     let board = document.createElement('div');
     board.classList.add('board');
@@ -33,7 +53,18 @@ function createOutline() {
     rollDie.addEventListener('click',movePlayer);
     
     board.appendChild(rollDie);
+
+    let endButton = document.createElement('button');
+    endButton.classList.add('endTurnButton');
+    endButton.textContent = 'End my turn';
+    endButton.addEventListener('click', endTurn)
+
+    board.appendChild(endButton);
 };
+
+function createInputFields(){
+
+}
 
 function createCity() {
 
@@ -149,7 +180,7 @@ function createCity() {
         let sibling = document.querySelector('.rightColumn')
         let newCityOne = document.createElement('div');
         newCityOne.classList.add('rightCity')
-        newCityOne.dataset.tile = `300` // give this a very high number?
+        newCityOne.dataset.tile = `300` 
 
         newCityOne.textContent = 'VE'
         parent.insertBefore(newCityOne, parent.lastElementChild);
@@ -159,7 +190,7 @@ function createCity() {
 
         let newCityTwo = document.createElement('div');
         newCityTwo.classList.add('leftCity')
-        newCityTwo.dataset.tile = `200` //give this a very high number?
+        newCityTwo.dataset.tile = `200` 
 
         newCityTwo.textContent = 'IA';
         parent.insertBefore(newCityTwo, newCityOne);;
@@ -518,8 +549,31 @@ function createArrows() {
             color: 'blue'
         });
 };
+//the name needs to be an input from a field, not hardcoded
+function createPlayers(){
+    let count = Number(document.querySelector('input[name="players"]:checked').value)
+        switch(count){
+            case 2:
+                new Player('Harry', 'playerOne');
+                new Player('Dave');
+            break;
+            case 3:
+                new Player('Harry', 'playerOne');
+                new Player('Dave');
+                new Player('Will');
+            break;
+            case 4:
+                new Player('Harry', 'playerOne');
+                new Player('Dave');
+                new Player('Will');
+                new Player('Geoff');
+            break;
+        }
+}
 
 function create() {
+    createPlayers()
+    activePlayer = playerArray [0]
     createOutline()
     while (tileNumber < 165) {
         createCity();
@@ -530,7 +584,7 @@ function create() {
         createCity();
         createArrows();
     }
-};
+} ;
 
 
 
@@ -560,12 +614,15 @@ function removeItemOnce(arr, value) {
 
 
 function movePlayer() {
+    document.querySelector('.rollDie').removeEventListener('click',movePlayer);
+    
     const boardTop = Array.from(document.querySelectorAll('.firstRow > [data-tile], .firstRow > .tileRow > [data-tile]'))
     const boardSideRight = Array.from(document.querySelectorAll('.rightColumnPartTop > [data-tile], [data-tile ="87"], .rightColumnPartBottom > [data-tile]'));
     const boardBottom = Array.from(document.querySelectorAll('.thirdRow > [data-tile], .thirdRow > .tileRow > [data-tile]'));
     const boardSideLeft = Array.from(document.querySelectorAll('.leftColumn > [data-tile]'));
 
-    const allTiles = boardTop.concat(boardSideRight, boardBottom, boardSideLeft);
+     allTiles = boardTop.concat(boardSideRight, boardBottom, boardSideLeft);
+    
 
 
 
@@ -627,18 +684,35 @@ function movePlayer() {
    
 
 }
+
+function endTurn(){
+    if(playerArray[playerArray.indexOf(activePlayer) +1] === undefined){
+        activePlayer = playerArray[0];
+    } else {
+    activePlayer = playerArray[playerArray.indexOf(activePlayer) +1];
+    ;
+} document.querySelector('.rollDie').addEventListener('click',movePlayer);  
+}
+
+function chooseStart(){
+    let cities = Array.from(document.querySelectorAll('.city'))
+}
 //A player object for testing.
 
-const activePlayer = { name: 'Dave', moves: 0, position: 1 };
+// const activePlayer = { name: 'Dave', moves: 0, position: 1 };
 
 
 // allTiles[`${playerOne.position}`- 1] // gets the position of the player on the board
 //include more parameters in the function declaration when needed, name to equal some input value
-function Player(name) {
+function Player(name, identifier) {
     this.name = name;
-    this.moves = 0;
+    this.number = playerArray.length + 1
+    this.money = 10
     this.position = 0;
-
+    this.class = identifier;
+    playerArray.push(this);
 };
 
 // position in index of the array, not on the board
+
+// end turn button: activePlayer = playerArray.indexOf(activePlayer + 1)

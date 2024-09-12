@@ -1,4 +1,44 @@
 
+.titleScreen{
+  display:flex;
+  background-color: rgb(117 190 218 / 50%);
+  width: 95vw;
+  height:50vh;
+  justify-content: center;
+}
+.titleScreen h1 {
+  align-self: center;
+  font-size: 100px;
+}
+.titleScreenButtons{
+  display:flex;
+  width:95vw;
+}
+.titleScreenButtonsLeft{
+  display:flex;
+flex-grow:1;
+justify-content: center;
+}
+#startGame{
+  align-self: center;
+  color: blue;
+  flex-grow:1;
+  height:100%;
+}
+.titleScreenButtonsRight{
+  display:flex;
+flex-grow:1;
+}
+
+.fieldBox{
+  margin-top: 8px;
+  display:flex;
+  flex-direction: column;
+  
+}
+.nameInput{
+  margin-bottom: 2px;
+}
 
   .point {
     margin:5px;
