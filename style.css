@@ -169,3 +169,16 @@ flex-grow:1;
 .rollDie{
   color:red;
 }
+
+.playerOne{
+  box-shadow: 0 0 3px 5px red;
+}
+.playerTwo{
+  box-shadow: 0 0 3px 5px blue;
+}
+.playerThree{
+  box-shadow: 0 0 3px 5px green;
+}
+.playerFour{
+  box-shadow: 0 0 3px 5px yellow;
+}

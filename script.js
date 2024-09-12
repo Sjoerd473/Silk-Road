@@ -3,6 +3,8 @@ let allTiles = [];
 let playerArray = [];
 let activePlayer
 
+document.querySelector('#startGame').addEventListener('click', create);
+
 document.querySelectorAll('.playerButtons').forEach((button) => {
     button.addEventListener('click', () => {
         let value = Number(document.querySelector('input[name="players"]:checked').value)
@@ -12,7 +14,8 @@ document.querySelectorAll('.playerButtons').forEach((button) => {
         for (i = 0; i < value; i++) {
             let field = document.createElement('input');
             field.classList.add('nameInput');
-            field.setAttribute('type', 'text',);
+            field.setAttribute('type', 'text');
+            field.setAttribute('value', `Player${i+1} name`);
             field.id = ('player' + j);
             j++
             parent.appendChild(field);
@@ -65,9 +68,7 @@ function createOutline() {
     board.appendChild(endButton);
 };
 
-function createInputFields() {
 
-}
 
 function createCity() {
 
@@ -561,18 +562,18 @@ function createPlayers() {
         switch (count) {
             case 2:
                 new Player(name1, 'playerOne');
-                new Player(name2);
+                new Player(name2, 'playerTwo');
                 break;
             case 3:
                 new Player(name1, 'playerOne');
-                new Player(name2);
-                new Player(name3);
+                new Player(name2, 'playerTwo');
+                new Player(name3, 'playerThree');
                 break;
             case 4:
                 new Player(name1, 'playerOne');
-                new Player(name2);
-                new Player(name3);
-                new Player(name4);
+                new Player(name2, 'playerTwo');
+                new Player(name3, 'playerThree');
+                new Player(name4, 'playerFour');
                 break;
         }
     } else if (count === 3) {
@@ -582,18 +583,18 @@ function createPlayers() {
         switch (count) {
             case 2:
                 new Player(name1, 'playerOne');
-                new Player(name2);
+                new Player(name2, 'playerTwo');
                 break;
             case 3:
                 new Player(name1, 'playerOne');
-                new Player(name2);
-                new Player(name3);
+                new Player(name2, 'playerTwo');
+                new Player(name3, 'playerThree');
                 break;
             case 4:
                 new Player(name1, 'playerOne');
-                new Player(name2);
-                new Player(name3);
-                new Player(name4);
+                new Player(name2, 'playerTwo');
+                new Player(name3, 'playerThree');
+                new Player(name4, 'playerFour');
                 break;
         }
 
@@ -606,23 +607,22 @@ function createPlayers() {
         switch (count) {
             case 2:
                 new Player(name1, 'playerOne');
-                new Player(name2);
+                new Player(name2, 'playerTwo');
                 break;
             case 3:
                 new Player(name1, 'playerOne');
-                new Player(name2);
-                new Player(name3);
+                new Player(name2, 'playerTwo');
+                new Player(name3, 'playerThree');
                 break;
             case 4:
                 new Player(name1, 'playerOne');
-                new Player(name2);
-                new Player(name3);
-                new Player(name4);
+                new Player(name2, 'playerTwo');
+                new Player(name3, 'playerThree');
+                new Player(name4, 'playerFour');
                 break;
-        }
     }
 
-
+    }
 }
 
 function create() {
@@ -677,7 +677,7 @@ function movePlayer() {
 
     const moves = rollDice(1);
     const position = allTiles[activePlayer.position];
-    position.classList.add('activePlayer')
+    
 
     if (activePlayer.position <= 5) {
 
@@ -694,8 +694,8 @@ function movePlayer() {
             tile.classList.add('movement')
             tile.addEventListener('click', (e) => {
                 activePlayer.position = allTiles.indexOf(e.target);
-                e.target.classList.add('activePlayer');
-                position.classList.remove('activePlayer');
+                e.target.classList.add(activePlayer.class);
+                position.classList.remove(activePlayer.class);
                 movement.forEach((tile) => { tile.classList.remove('movement') })
             });
         })
@@ -711,8 +711,8 @@ function movePlayer() {
             tile.addEventListener('click', (e) => {
                 activePlayer.position = allTiles.indexOf(e.target);
 
-                e.target.classList.add('activePlayer');
-                position.classList.remove('activePlayer');
+                e.target.classList.add(activePlayer.class);
+                position.classList.remove(activePlayer.class);
                 movement.forEach((tile) => { tile.classList.remove('movement') })
             });
         })
@@ -723,8 +723,8 @@ function movePlayer() {
             tile.classList.add('movement')
             tile.addEventListener('click', (e) => {
                 activePlayer.position = allTiles.indexOf(e.target);
-                e.target.classList.add('activePlayer');
-                position.classList.remove('activePlayer');
+                e.target.classList.add(activePlayer.class);
+                position.classList.remove(activePlayer.class);
                 movement.forEach((tile) => { tile.classList.remove('movement') })
             });
         })
@@ -751,35 +751,81 @@ function chooseStart() {
     const boardSideLeft = Array.from(document.querySelectorAll('.leftColumn > [data-tile]'));
 
     allTiles = boardTop.concat(boardSideRight, boardBottom, boardSideLeft);
-    
+
     let clockwise = Array.from(document.querySelectorAll('.city'));
     let counterClockwise = Array.from(document.querySelectorAll('.city')).reverse();
     let movement = rollDice(1);
+
+    if (movement === 6) {
     
+    let optionOne = clockwise[movement - 1];
+    optionOne.classList.add('movement');
+    optionOne.addEventListener('click', function (e) {
+        optionOne.removeEventListener('click', (e))
+        
+        activePlayer.position = allTiles.indexOf(e.target);
+        e.target.classList.add(activePlayer.class);
+        optionOne.classList.remove('movement');
+        
+        if (playerArray[playerArray.indexOf(activePlayer) + 1] === undefined) {
+            activePlayer = playerArray[0];
+        } else {
+            activePlayer = playerArray[playerArray.indexOf(activePlayer) + 1];
+            ;
+        }})
+    } else{ let optionOne = clockwise[movement - 1];
+        optionOne.classList.add('movement');
+        optionOne.addEventListener('click', function (e) {
+            optionOne.removeEventListener('click', (e))
+            optionTwo.removeEventListener('click', (e));
+            activePlayer.position = allTiles.indexOf(e.target);
+            e.target.classList.add(activePlayer.class);
+            optionOne.classList.remove('movement');
+            optionTwo.classList.remove('movement');
+            if (playerArray[playerArray.indexOf(activePlayer) + 1] === undefined) {
+                activePlayer = playerArray[0];
+            } else {
+                activePlayer = playerArray[playerArray.indexOf(activePlayer) + 1];
+                ;
+            }})
+        let optionTwo = counterClockwise[movement - 1];
+        optionTwo.classList.add('movement');
+        optionTwo.addEventListener('click', function (e) {
+            optionOne.removeEventListener('click', (e))
+            optionTwo.removeEventListener('click', (e));
+            activePlayer.position = allTiles.indexOf(e.target);
+            e.target.classList.add(activePlayer.class);
+            optionOne.classList.remove('movement');
+            optionTwo.classList.remove('movement');
+            if (playerArray[playerArray.indexOf(activePlayer) + 1] === undefined) {
+                activePlayer = playerArray[0];
+            } else {
+                activePlayer = playerArray[playerArray.indexOf(activePlayer) + 1];
+                ;
+        }
+        
+    })}
+
+    
+}
+
+/*function something() {
     let optionOne = clockwise[movement - 1];
     optionOne.classList.add('movement');
     optionOne.addEventListener('click', function (e) {
         optionOne.removeEventListener('click', (e))
         optionTwo.removeEventListener('click', (e));
         activePlayer.position = allTiles.indexOf(e.target);
+        e.target.classList.add(activePlayer.class);
         optionOne.classList.remove('movement');
         optionTwo.classList.remove('movement');
-    })
-    
-    let optionTwo = counterClockwise[movement - 1];
-    optionTwo.classList.add('movement');
-    optionTwo.addEventListener('click', function (e) {
-        optionOne.removeEventListener('click', (e))
-        optionTwo.removeEventListener('click', (e));
-        activePlayer.position = allTiles.indexOf(e.target);
-        optionOne.classList.remove('movement');
-        optionTwo.classList.remove('movement');
-    })
-    
-}
-//A player object for testing.
-
-// const activePlayer = { name: 'Dave', moves: 0, position: 1 };
+        if (playerArray[playerArray.indexOf(activePlayer) + 1] === undefined) {
+            activePlayer = playerArray[0];
+        } else {
+            activePlayer = playerArray[playerArray.indexOf(activePlayer) + 1];
+            ;
+        }})
+} */
 
 
 // allTiles[`${playerOne.position}`- 1] // gets the position of the player on the board
