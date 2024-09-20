@@ -1,4 +1,8 @@
 
+.flexBody {
+  display:flex;
+}
+
 .titleScreen{
   display:flex;
   background-color: rgb(117 190 218 / 50%);
@@ -75,7 +79,7 @@ flex-grow:1;
   }
 
   .point, .city, .leftCity, .rightCity{
-    transition: box-shadow 2s;
+    transition: box-shadow 2s, background-color 2s;
   }
 
   
@@ -83,10 +87,56 @@ flex-grow:1;
   .board {
     display:flex;
     flex-direction: column;
-    width: 95vw;
+    width: 85vw;
     height: 95vh;
     
     align-self: center;
+  }
+
+  .buttonContainer{
+    display:flex;
+    flex-grow:1;
+  }
+
+  .buttonContainerLeft{
+    display:flex;
+    flex-grow:1;
+    justify-content: center;
+    align-content:center;
+    flex-wrap:wrap;
+  }
+
+  .buttonContainerRight{
+    display:flex;
+    flex-direction:column;
+    flex-grow:1;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+  }
+
+  .travelButton{
+    display:flex;
+    margin-top:5px;
+  }
+
+  .infoPanel {
+    display:flex;
+    flex-direction: column;
+  
+    width: 15vw;
+    height: 95vh;
+
+  }
+
+  .infoPanelTop{
+    flex-grow:1;
+    border: 1px solid black;
+  }
+
+  .infoPanelBottom{
+    flex-grow:1;
+    border:1px solid black;
   }
 
  
@@ -181,4 +231,17 @@ flex-grow:1;
 }
 .playerFour{
   box-shadow: 0 0 3px 5px yellow;
+}
+
+.playerOneTile{
+  background-color: red;
+}
+.playerTwoTile{
+  background-color: blue;
+}
+.playerThreeTile{
+  background-color: green;
+}
+.playerFourTile{
+  background-color: yellow;
 }
