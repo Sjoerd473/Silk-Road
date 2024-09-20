@@ -50,7 +50,7 @@ function createOutline() {
     let infoPanelBottom = document.createElement('div');
     infoPanelBottom.classList.add('infoPanelBottom');
     infoPanel.appendChild(infoPanelBottom)
-    infoPanelBottom.textContent = `It is currently ${activePlayer.name}'s turn.`
+    infoPanelBottom.textContent = `Current player : ${activePlayer.name}`
     let firstRow = document.createElement('div');
     firstRow.classList.add('firstRow');
     board.appendChild(firstRow);
@@ -121,16 +121,16 @@ function createOutline() {
                                     rollDie.removeEventListener('click', placeOccasion);
                                     rollDie.textContent = 'Start the Game!';
                                     rollDie.addEventListener('click', function changeFive() {
-                                            rollDie.remove();
-                                            rollDie.removeEventListener('click', changeFive);
-                                            let newButton = document.createElement('button');
-                                            newButton.textContent = 'Roll the dice to move';
-                                            newButton.addEventListener('click', movePlayer);
-                                            checkTravel()
-                                            newButton.classList.add('rollDie')
-                                            buttonContainerLeft.appendChild(newButton);
+                                        rollDie.remove();
+                                        rollDie.removeEventListener('click', changeFive);
+                                        let newButton = document.createElement('button');
+                                        newButton.textContent = 'Roll the dice to move';
+                                        newButton.addEventListener('click', movePlayer);
+                                        checkTravel()
+                                        newButton.classList.add('rollDie')
+                                        buttonContainerLeft.appendChild(newButton);
                                     })
-                                    
+
                                 }
                             })
                         }
@@ -143,7 +143,7 @@ function createOutline() {
 
     rollDie.addEventListener('click', () => {
         let infoPanelBottom = document.querySelector('.infoPanelBottom')
-        infoPanelBottom.textContent = `It is currently ${activePlayer.name}'s turn.`
+        infoPanelBottom.textContent = `Current player : ${activePlayer.name}`
     })
 
     buttonContainerLeft.appendChild(rollDie);
@@ -480,7 +480,7 @@ function createArrows() {
             dash: true,
             path: 'arc',
             color: 'blue'
-        }); 
+        });
 
     // CO to TR
     new LeaderLine(LeaderLine.mouseHoverAnchor(
@@ -595,7 +595,7 @@ function createArrows() {
         document.querySelector(`[data-tile='10']`),
         {
 
-            
+
             endPlug: 'arrow3',
 
             size: 3,
@@ -639,7 +639,7 @@ function createArrows() {
             startPlug: 'arrow3',
             endPlug: 'arrow3',
             middleLabel: LeaderLine.pathLabel('3 Dice'),
-            size: 3,    
+            size: 3,
             dash: true,
 
             color: 'blue'
@@ -832,56 +832,122 @@ function movePlayer() {
 
 }
 
-function checkTravel(position){
+function checkTravel(position) {
     let parent = document.querySelector('.buttonContainerRight')
-        parent.replaceChildren()
-   //position = 0 //for testing
-    if (position === 0){
-        
+    parent.replaceChildren()
+
+    let venice = document.querySelector('.rightCity');
+    let java = document.querySelector('.leftCity');
+    //position = 0 //for testing
+    if (position === 0) {
+
         let buttonOne = document.createElement('button');
         buttonOne.classList.add('travelButton');
         buttonOne.textContent = 'Sail to TR';
-        buttonOne.addEventListener('click', ()=>{if(seaTravel(2) === true){
-            console.log('shipwreck')                                    // display shipwreck on the page
-        }else{ console.log('you survived')}});
+        buttonOne.addEventListener('click', () => {
+            if (seaTravel(2) === true) {
+                return;
+            } else {
+
+                console.log(position);
+                allTiles[position].classList.remove(activePlayer.mClass);
+                activePlayer.position = 9;
+                allTiles[9].classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
         parent.appendChild(buttonOne);
-        
+
         let buttonTwo = document.createElement('button');
         buttonTwo.classList.add('travelButton');
         buttonTwo.textContent = 'Sail to VE';
-        buttonTwo.addEventListener('click', ()=>{seaTravel(3)});
+        buttonTwo.addEventListener('click', () => {
+            if (seaTravel(3) === true) {
+                
+            } else {
+
+                console.log(position);
+                allTiles[position].classList.remove(activePlayer.mClass);
+                activePlayer.position = venice; // change
+                venice.classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
         parent.appendChild(buttonTwo);
 
         let buttonThree = document.createElement('button');
         buttonThree.classList.add('travelButton');
         buttonThree.textContent = 'Sail to GE';
-        buttonThree.addEventListener('click', ()=>{seaTravel(2)});
+        buttonThree.addEventListener('click', () => {
+            if (seaTravel(2) === true) {
+                return;
+            } else {
+
+                console.log(position);
+                allTiles[position].classList.remove(activePlayer.mClass);
+                activePlayer.position = 152;
+                allTiles[152].classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
         parent.appendChild(buttonThree);
 
 
-    } else if (position === 9){
+    } else if (position === 9) {
 
         let buttonOne = document.createElement('button');
         buttonOne.classList.add('travelButton');
         buttonOne.textContent = 'Sail to CO';
-        buttonOne.addEventListener('click', ()=>{seaTravel(2)});
+        buttonOne.addEventListener('click', () => {
+            if (seaTravel(2) === true) {
+                return;
+            } else {
+
+                console.log(position);
+                allTiles[position].classList.remove(activePlayer.mClass);
+                activePlayer.position = 0;
+                allTiles[0].classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
         parent.appendChild(buttonOne);
-        
+
         let buttonTwo = document.createElement('button');
         buttonTwo.classList.add('travelButton');
         buttonTwo.textContent = 'Sail to VE';
-        buttonTwo.addEventListener('click', ()=>{seaTravel(4)});
+        buttonTwo.addEventListener('click', () => {
+            if (seaTravel(4) === true) {
+                return;
+            } else {
+
+                console.log(position);
+                allTiles[position].classList.remove(activePlayer.mClass);
+                activePlayer.position = venice; // change
+                venice.classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
         parent.appendChild(buttonTwo);
 
-    } else if (position === 31){
+    } else if (position === 31) {
 
         let buttonOne = document.createElement('button');
         buttonOne.classList.add('travelButton');
         buttonOne.textContent = 'Caravan to BA';
         buttonOne.addEventListener('click', landTravel(2));
         parent.appendChild(buttonOne);
-        
-    } else if (position === 57){
+
+    } else if (position === 57) {
 
         let buttonOne = document.createElement('button');
         buttonOne.classList.add('travelButton');
@@ -889,117 +955,302 @@ function checkTravel(position){
         buttonOne.addEventListener('click', landTravel(2));
         parent.appendChild(buttonOne);
 
-    } else if (position === 72) { 
+    } else if (position === 72) {
 
         let buttonOne = document.createElement('button');
         buttonOne.classList.add('travelButton');
         buttonOne.textContent = 'Sail to SH';
-        buttonOne.addEventListener('click', ()=>{seaTravel(4)});
+        buttonOne.addEventListener('click', () => {
+            if (seaTravel(4) === true) {
+                return;
+            } else {
+
+                console.log(position);
+                allTiles[position].classList.remove(activePlayer.mClass);
+                activePlayer.position = 87;
+                allTiles[87].classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
         parent.appendChild(buttonOne);
-        
+
         let buttonTwo = document.createElement('button');
         buttonTwo.classList.add('travelButton');
         buttonTwo.textContent = 'Sail to IA';
-        buttonTwo.addEventListener('click', ()=>{seaTravel(6)});
+        buttonTwo.addEventListener('click', () => {
+            if (seaTravel(6) === true) {
+                return;
+            } else {
+
+                console.log(position);
+                allTiles[position].classList.remove(activePlayer.mClass);
+                activePlayer.position = java; // change
+                java.classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
         parent.appendChild(buttonTwo);
 
-    } else if (position === 86){
+    } else if (position === 86) {
 
         let buttonOne = document.createElement('button');
         buttonOne.classList.add('travelButton');
         buttonOne.textContent = 'Sail to CA';
-        buttonOne.addEventListener('click', ()=>{seaTravel(4)});
+        buttonOne.addEventListener('click', () => {
+            if (seaTravel(4) === true) {
+                return;
+            } else {
+
+                console.log(position);
+                allTiles[position].classList.remove(activePlayer.mClass);
+                activePlayer.position = 73;
+                allTiles[73].classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
         parent.appendChild(buttonOne);
-        
+
         let buttonTwo = document.createElement('button');
         buttonTwo.classList.add('travelButton');
         buttonTwo.textContent = 'Sail to IA';
-        buttonTwo.addEventListener('click', ()=>{seaTravel(5)});
+        buttonTwo.addEventListener('click', () => {
+            if (seaTravel(5) === true) {
+                return;
+            } else {
+
+                console.log(position);
+                allTiles[position].classList.remove(activePlayer.mClass);
+                activePlayer.position = java; // change
+                java.classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
         parent.appendChild(buttonTwo);
-    } else if (position === 133){
+    } else if (position === 133) {
 
         let buttonOne = document.createElement('button');
         buttonOne.classList.add('travelButton');
         buttonOne.textContent = 'Caravan to TR';
         buttonOne.addEventListener('click', landTravel(2));
         parent.appendChild(buttonOne);
-    } else if (position === 145){
+    } else if (position === 145) {
         let buttonOne = document.createElement('button');
         buttonOne.classList.add('travelButton');
         buttonOne.textContent = 'Sail to SH';
-        buttonOne.addEventListener('click', ()=>{seaTravel(7)});
+        buttonOne.addEventListener('click', () => {
+            if (seaTravel(7) === true) {
+                return;
+            } else {
+
+                console.log(position);
+                allTiles[position].classList.remove(activePlayer.mClass);
+                activePlayer.position = 87;
+                allTiles[87].classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
         parent.appendChild(buttonOne);
-        
+
         let buttonTwo = document.createElement('button');
         buttonTwo.classList.add('travelButton');
         buttonTwo.textContent = 'Sail to GE';
-        buttonTwo.addEventListener('click', ()=>{seaTravel(1)});
+        buttonTwo.addEventListener('click', () => {
+            if (seaTravel(1) === true) {
+                return;
+            } else {
+
+                console.log(position);
+                allTiles[position].classList.remove(activePlayer.mClass);
+                activePlayer.position = 152;
+                allTiles[152].classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
         parent.appendChild(buttonTwo);
-    } else if (position === 153){
+    } else if (position === 152) {
 
         let buttonOne = document.createElement('button');
         buttonOne.classList.add('travelButton');
         buttonOne.textContent = 'Sail to ME';
-        buttonOne.addEventListener('click', ()=>{seaTravel(1)});
+        buttonOne.addEventListener('click', () => {
+            if (seaTravel(1) === true) {
+                return;
+            } else {
+
+                console.log(position);
+                allTiles[position].classList.remove(activePlayer.mClass);
+                activePlayer.position = 145;
+                allTiles[145].classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
         parent.appendChild(buttonOne);
-        
+
         let buttonTwo = document.createElement('button');
         buttonTwo.classList.add('travelButton');
         buttonTwo.textContent = 'Sail to VE';
-        buttonTwo.addEventListener('click', ()=>{seaTravel(3)});
+        buttonTwo.addEventListener('click', () => {
+            if (seaTravel(3) === true) {
+                return;
+            } else {
+
+                console.log(position);
+                allTiles[position].classList.remove(activePlayer.mClass);
+                activePlayer.position = venice; // change
+                venice.classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
         parent.appendChild(buttonTwo);
 
         let buttonThree = document.createElement('button');
         buttonThree.classList.add('travelButton');
-        buttonThree.textContent = 'Sail to GE';
-        buttonThree.addEventListener('click', ()=>{seaTravel(2)});
+        buttonThree.textContent = 'Sail to CO';
+        buttonThree.addEventListener('click', () => {
+            if (seaTravel(2) === true) {
+                return;
+            } else {
+
+                console.log(position);
+                allTiles[position].classList.remove(activePlayer.mClass);
+                activePlayer.position = 0;
+                allTiles[0].classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
         parent.appendChild(buttonThree);
 
-    } else if (position === 'VE'){
+    } else if (position === venice) {
 
         let buttonOne = document.createElement('button');
         buttonOne.classList.add('travelButton');
         buttonOne.textContent = 'Sail to CO';
-        buttonOne.addEventListener('click', ()=>{seaTravel(3)});
+        buttonOne.addEventListener('click', () => {
+            if (seaTravel(3) === true) {
+                return;
+            } else {
+
+                console.log(position);
+                venice.classList.remove(activePlayer.mClass);
+                activePlayer.position = 0;
+                allTiles[0].classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
         parent.appendChild(buttonOne);
-        
+
         let buttonTwo = document.createElement('button');
         buttonTwo.classList.add('travelButton');
         buttonTwo.textContent = 'Sail to TR';
-        buttonTwo.addEventListener('click', ()=>{seaTravel(4)});
+        buttonTwo.addEventListener('click', () => {
+            if (seaTravel(4) === true) {
+                return;
+            } else {
+
+                console.log(position);
+                venice.classList.remove(activePlayer.mClass);
+                activePlayer.position = 9;
+                allTiles[9].classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
         parent.appendChild(buttonTwo);
 
         let buttonThree = document.createElement('button');
         buttonThree.classList.add('travelButton');
         buttonThree.textContent = 'Sail to GE';
-        buttonThree.addEventListener('click', ()=>{seaTravel(3)});
+        buttonThree.addEventListener('click', () => {
+            if (seaTravel(3) === true) {
+                return;
+            } else {
+
+                console.log(position);
+                venice.classList.remove(activePlayer.mClass);
+                activePlayer.position = 152;
+                allTiles[152].classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
         parent.appendChild(buttonThree);
-    } else if (position === 'IA'){
+    } else if (position === java) {
         let buttonOne = document.createElement('button');
         buttonOne.classList.add('travelButton');
         buttonOne.textContent = 'Sail to CA';
-        buttonOne.addEventListener('click', ()=>{seaTravel(6)});
+        buttonOne.addEventListener('click', () => {
+            if (seaTravel(6) === true) {
+                return;
+            } else {
+
+                console.log(position);
+                java.classList.remove(activePlayer.mClass);
+                activePlayer.position = 73;
+                allTiles[73].classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
         parent.appendChild(buttonOne);
-        
+
         let buttonTwo = document.createElement('button');
         buttonTwo.classList.add('travelButton');
         buttonTwo.textContent = 'Sail to SH';
-        buttonTwo.addEventListener('click', ()=>{seaTravel(5)});
-        parent.appendChild(buttonTwo);    }
+        buttonTwo.addEventListener('click', () => {
+            if (seaTravel(5) === true) {
+                return;
+            } else {
+
+                console.log(position);
+                java.classList.remove(activePlayer.mClass);
+                activePlayer.position = 87;
+                allTiles[87].classList.add(activePlayer.mClass);
+                endTurn();
+
+
+            }
+        });
+        parent.appendChild(buttonTwo);
     }
+}
 function endTurn() {
     if (playerArray[playerArray.indexOf(activePlayer) + 1] === undefined) {
         activePlayer = playerArray[0];
     } else {
         activePlayer = playerArray[playerArray.indexOf(activePlayer) + 1];
         ;
-    } 
-   checkTravel(activePlayer.position)
+    }
+    let infoPanelBottom = document.querySelector('.infoPanelBottom')
+        infoPanelBottom.textContent = `Current player : ${activePlayer.name}`
+    checkTravel(activePlayer.position)
     let button = document.querySelector('.rollDie');
     button.addEventListener('click', movePlayer);
     button.removeEventListener('click', endTurn);
     button.textContent = 'Roll the die to move!';
-    
+
 }
 
 function chooseStart() {
@@ -1032,7 +1283,7 @@ function chooseStart() {
                 activePlayer = playerArray[0];
             } else {
                 activePlayer = playerArray[playerArray.indexOf(activePlayer) + 1];
-                
+
             }
         })
     } else {
@@ -1049,7 +1300,7 @@ function chooseStart() {
                 activePlayer = playerArray[0];
             } else {
                 activePlayer = playerArray[playerArray.indexOf(activePlayer) + 1];
-                
+
             }
         })
         let optionTwo = counterClockwise[movement - 1];
@@ -1065,7 +1316,7 @@ function chooseStart() {
                 activePlayer = playerArray[0];
             } else {
                 activePlayer = playerArray[playerArray.indexOf(activePlayer) + 1];
-                
+
             }
 
         })
@@ -1091,23 +1342,28 @@ function Player(name, movement, static) {
 // position in index of the array, not on the board
 
 
-function seaTravel(dice){
- let total = [];
-        let otherTotal = [];
-        for (let i = 0; i < dice; i++) {
-            total.push(Math.ceil(Math.random() * 6));
-            
-        }
-        for (let numbers of total){
-            if(otherTotal.includes(numbers)){
-                return true
-            } else{ 
-                otherTotal.push(numbers);
-            }
-            }  return false;
-    }
+function seaTravel(dice) {
+    let total = [];
+    let otherTotal = [];
+    let infoPanel = document.querySelector('.infoPanelTop');
+    
+    for (let i = 0; i < dice; i++) {
+        total.push(Math.ceil(Math.random() * 6));
 
-function landTravel(dice){
+    }
+    for (let numbers of total) {
+        if (otherTotal.includes(numbers)) {
+            infoPanel.textContent = `The dice you rolled are  ${total.join('-')}`;
+            
+            return true
+        } else {
+            otherTotal.push(numbers);
+        }
+    } infoPanel.textContent = `The dice you rolled are  ${total.join('-')}`;
+    return false;
+}
+
+function landTravel(dice) {
 
 
 }
@@ -1122,7 +1378,7 @@ function placeBandit() {
 
         let modifiedTiles = allTiles.toReversed();
         modifiedTiles = modifiedTiles.concat(extraTiles).reverse();
-        
+
 
 
         if (movement % 2 === 0) {
@@ -1135,12 +1391,12 @@ function placeBandit() {
                 ;
             }
         } else {
-            
+
             let reversePosition = modifiedTiles.indexOf(allTiles[position]);
-            
-            
+
+
             let brigand = modifiedTiles[reversePosition - movement];
-            
+
             brigand.classList.add(activePlayer.sClass);
             if (playerArray[playerArray.indexOf(activePlayer) + 1] === undefined) {
                 activePlayer = playerArray[0];
@@ -1372,16 +1628,16 @@ function placeOccasion() {
 
 }
 
-function startGame(){
+function startGame() {
     activePlayer = playerArray[0]
     let button = document.querySelector('.rollDie');
-    button.textContent ='Click to roll the dice to move'
+    button.textContent = 'Click to roll the dice to move'
     button.removeEventListener('click', startGame);
     button.addEventListener('click', movePlayer);
 
 }
 
-function updateDisplay(){
+function updateDisplay() {
     let textWindow = document.querySelector('.infoPanelBottom');
     textWindow.textContent = `This is the first line \r\n`
     textWindow.textContent += `This is the second line \r\n`
